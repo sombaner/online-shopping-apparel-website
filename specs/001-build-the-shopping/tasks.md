@@ -24,12 +24,12 @@ Assumptions:
 
 ---
 ## Phase 3.1: Setup & Tooling
- - [X] T001 Initialize Node.js project (package.json) with scripts: dev, build, test, lint
- - [X] T002 Add core dependencies (vue, vue-router, vite, better-sqlite3, dotenv, zod, express, supertest, vitest, playwright, cross-env)
- - [X] T003 Add dev dependencies (eslint, eslint-plugin-import, eslint-plugin-vue, prettier, vite-node, nodemon, axe-core, @playwright/test)
- - [X] T004 [P] Configure ESLint + Prettier (.eslintrc.cjs, .prettierrc) per constitution
- - [X] T005 [P] Create `./.nvmrc` & `.editorconfig`
- - [X] T006 [P] Create base project structure (`src/`, `src/server/`, `src/server/repositories/`, `src/server/services/`, `src/server/api/`, `src/server/middleware/`, `src/server/lib/`, `src/server/config/`, `src/client/`)
+ - [ ] T001 Initialize Node.js project (package.json) with scripts: dev, build, test, lint
+ - [ ] T002 Add core dependencies (vue, vue-router, vite, better-sqlite3, dotenv, zod, express, supertest, vitest, playwright, cross-env)
+ - [ ] T003 Add dev dependencies (eslint, eslint-plugin-import, eslint-plugin-vue, prettier, vite-node, nodemon, axe-core, @playwright/test)
+ - [ ] T004 [P] Configure ESLint + Prettier (.eslintrc.cjs, .prettierrc) per constitution
+ - [ ] T005 [P] Create `./.nvmrc` & `.editorconfig`
+ - [ ] T006 [P] Create base project structure (`src/`, `src/server/`, `src/server/repositories/`, `src/server/services/`, `src/server/api/`, `src/server/middleware/`, `src/server/lib/`, `src/server/config/`, `src/client/`)
 - [ ] T007 Environment config: `.env.example` with vars (DATABASE_URL, PORT, LOG_LEVEL, RATE_LIMIT_WINDOW_MS)
 - [ ] T008 Logging utility scaffold (`src/server/lib/logger.js`) with JSON schema (R-04)
 - [ ] T009 Correlation ID middleware (`src/server/middleware/correlationId.js`) generating `traceId`
