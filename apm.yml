@@ -1,0 +1,15 @@
+name: online-shopping-apparel-website
+version: 1.0.0
+description: A online-shopping-apparel-website APM application
+author: sombaner
+
+scripts:
+  start: "copilot --log-level all --log-dir copilot-logs -p feature-implementation.prompt.md"
+  llm: "llm feature-implementation.prompt.md -m github/gpt-4o-mini"
+  debug: "RUST_LOG=debug codex --skip-git-repo-check feature-implementation.prompt.md"
+
+dependencies:
+  apm:
+    - github/design-guidelines  # Accessibility rules + UI review workflows
+  mcp:
+    - microsoft/azure-devops-mcp

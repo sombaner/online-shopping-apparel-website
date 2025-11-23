@@ -1,0 +1,18 @@
+# Hello World APM Application
+
+Welcome to APM, sombaner! This demonstrates:
+- ✅ Parameter substitution with sombaner
+- ✅ MCP server integration with GitHub
+- ✅ Reusable, shareable prompt applications
+
+## Instructions
+
+Please:
+1. Use the **search_repositories** tool to display my key GitHub Repositories and quickly understand what they do, using my username: sombaner
+2. Give sombaner an enthusiastic welcome to AI-native development
+3. Share one interesting insight about their GitHub repositories
+4. Suggest their next step with APM based on their GitHub activity
+
+## Expected Output
+
+A personalized greeting with GitHub repository insights and tailored APM recommendations.
