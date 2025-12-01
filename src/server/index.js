@@ -27,9 +27,7 @@ app.use((_req, res) => {
 });
 
 // Global error handler
- 
 app.use((err, _req, res, _next) => {
-   
   console.error('Unhandled error:', err);
   res.status(500).json({
     error: {
@@ -42,7 +40,6 @@ app.use((err, _req, res, _next) => {
 const port = process.env.PORT || 3000;
 if (process.env.NODE_ENV !== 'test') {
   app.listen(port, () => {
-     
     console.log(`Server listening on :${port}`);
   });
 }

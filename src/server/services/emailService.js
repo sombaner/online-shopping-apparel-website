@@ -18,25 +18,16 @@ export async function sendEmail({ to, subject, text, html }) {
   const messageId = `msg_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
 
   // Console output for development/testing
-   
   console.log('\n========== EMAIL SENT (STUB) ==========');
-   
   console.log(`Message ID: ${messageId}`);
-   
   console.log(`To: ${to}`);
-   
   console.log(`Subject: ${subject}`);
-   
   console.log('--- Text Body ---');
-   
   console.log(text);
   if (html) {
-     
     console.log('--- HTML Body ---');
-     
     console.log(html);
   }
-   
   console.log('========================================\n');
 
   return {

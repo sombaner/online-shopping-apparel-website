@@ -5,9 +5,6 @@ import app from '../../src/server/index.js';
 import { clearUsers, register, verifyEmail } from '../../src/server/services/authService.js';
 import { generateEmailVerificationToken } from '../../src/server/lib/authTokens.js';
 
-// Set JWT_SECRET for testing
-process.env.JWT_SECRET = 'test-secret-key-for-testing-only-do-not-use-in-production';
-
 describe('Auth Flow Integration Tests', () => {
   beforeEach(() => {
     clearUsers();

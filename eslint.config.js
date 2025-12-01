@@ -21,7 +21,7 @@ export default [
       import: pluginImport,
     },
     rules: {
-      'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      'no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
       'import/order': ['warn', { 'newlines-between': 'always' }],
     },
   },

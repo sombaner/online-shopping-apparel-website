@@ -444,8 +444,7 @@ export function getUserById(userId) {
  * @returns {object} Sanitized user object
  */
 function sanitizeUser(user) {
-  // eslint-disable-next-line no-unused-vars
-  const { passwordHash, ...safeUser } = user;
+  const { passwordHash: _, ...safeUser } = user;
   return safeUser;
 }
 

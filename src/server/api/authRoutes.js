@@ -28,8 +28,12 @@ import {
 import { getPasswordPolicy } from '../lib/passwordPolicy.js';
 import { verifyToken } from '../lib/authTokens.js';
 import { createErrorEnvelope, ErrorCodes, AppError } from '../lib/errors.js';
+import { authRateLimiter } from '../middleware/rateLimiter.js';
 
 const router = Router();
+
+// Apply rate limiting to all auth routes
+router.use(authRateLimiter());
 
 // Request validation schemas
 const registerSchema = z.object({
@@ -114,7 +118,6 @@ function handleError(error, res) {
     );
   }
 
-   
   console.error('Unhandled error:', error);
   return res.status(500).json(
     createErrorEnvelope(ErrorCodes.INTERNAL_ERROR, 'An unexpected error occurred')
