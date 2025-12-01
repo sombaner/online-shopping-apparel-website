@@ -1,12 +1,21 @@
-import express from 'express';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
 import dotenv from 'dotenv';
+import express from 'express';
 
 import authRoutes from './api/authRoutes.js';
 
 dotenv.config();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const app = express();
 app.use(express.json());
+
+// Serve static files from client directory
+app.use(express.static(join(__dirname, '../client')));
 
 // Health check
 app.get('/health', (_req, res) => {

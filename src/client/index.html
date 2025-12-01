@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login / Register - E-Commerce Platform</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; }
+    .auth-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; }
+    .auth-container { width: 100%; max-width: 480px; }
+    .auth-card { background: white; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); overflow: hidden; }
+    .auth-tabs { display: flex; border-bottom: 1px solid #e0e0e0; }
+    .tab-button { flex: 1; padding: 16px; border: none; background: none; font-size: 16px; font-weight: 600; color: #666; cursor: pointer; transition: all 0.3s ease; }
+    .tab-button:hover { color: #333; background: #f5f5f5; }
+    .tab-button.active { color: #667eea; border-bottom: 3px solid #667eea; margin-bottom: -1px; }
+    .auth-form { padding: 32px; display: none; }
+    .auth-form.active { display: block; }
+    .auth-form h2 { margin: 0 0 8px 0; font-size: 24px; color: #333; }
+    .subtitle { margin: 0 0 24px 0; color: #666; }
+    .form-group { margin-bottom: 20px; }
+    .form-row { display: flex; gap: 16px; }
+    .form-row .form-group { flex: 1; }
+    label { display: block; margin-bottom: 6px; font-weight: 500; color: #333; }
+    input { width: 100%; padding: 12px 16px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; box-sizing: border-box; transition: border-color 0.3s ease; }
+    input:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102,126,234,0.1); }
+    .password-requirements { margin-top: 8px; padding: 12px; background: #f8f9fa; border-radius: 6px; font-size: 13px; }
+    .password-requirements p { margin: 0 0 8px 0; font-weight: 500; color: #666; }
+    .password-requirements ul { margin: 0; padding-left: 20px; }
+    .password-requirements li { color: #999; margin-bottom: 4px; }
+    .password-requirements li.met { color: #28a745; }
+    .error-message { padding: 12px 16px; background: #fff5f5; border: 1px solid #fed7d7; border-radius: 8px; color: #c53030; margin-bottom: 20px; display: none; }
+    .success-message { padding: 12px 16px; background: #f0fff4; border: 1px solid #c6f6d5; border-radius: 8px; color: #276749; margin-bottom: 20px; display: none; }
+    .submit-button { width: 100%; padding: 14px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; border-radius: 8px; color: white; font-size: 16px; font-weight: 600; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .submit-button:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(102,126,234,0.4); }
+    .submit-button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .auth-links { margin-top: 16px; text-align: center; }
+    .link-button { background: none; border: none; color: #667eea; font-size: 14px; cursor: pointer; text-decoration: underline; }
+    .link-button:hover { color: #764ba2; }
+    @media (max-width: 480px) { .form-row { flex-direction: column; gap: 0; } .auth-form { padding: 24px; } }
+  </style>
+</head>
+<body>
+  <div class="auth-page">
+    <div class="auth-container">
+      <div class="auth-card">
+        <div class="auth-tabs">
+          <button class="tab-button active" data-tab="login">Login</button>
+          <button class="tab-button" data-tab="register">Register</button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="login-form" class="auth-form active">
+          <h2>Welcome Back</h2>
+          <p class="subtitle">Sign in to your account</p>
+          <div id="login-error" class="error-message"></div>
+          <div class="form-group">
+            <label for="login-email">Email</label>
+            <input id="login-email" type="email" placeholder="Enter your email" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input id="login-password" type="password" placeholder="Enter your password" required autocomplete="current-password">
+          </div>
+          <button type="submit" class="submit-button">Sign In</button>
+          <div class="auth-links">
+            <button type="button" class="link-button" id="forgot-password-btn">Forgot password?</button>
+          </div>
+        </form>
+
+        <!-- Register Form -->
+        <form id="register-form" class="auth-form">
+          <h2>Create Account</h2>
+          <p class="subtitle">Join us today</p>
+          <div id="register-error" class="error-message"></div>
+          <div id="register-success" class="success-message"></div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="register-firstName">First Name</label>
+              <input id="register-firstName" type="text" placeholder="First name" required autocomplete="given-name">
+            </div>
+            <div class="form-group">
+              <label for="register-lastName">Last Name</label>
+              <input id="register-lastName" type="text" placeholder="Last name" required autocomplete="family-name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="register-email">Email</label>
+            <input id="register-email" type="email" placeholder="Enter your email" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="register-password">Password</label>
+            <input id="register-password" type="password" placeholder="Create a password" required autocomplete="new-password">
+            <div class="password-requirements">
+              <p>Password must have:</p>
+              <ul>
+                <li id="req-length">At least 8 characters</li>
+                <li id="req-upper">One uppercase letter</li>
+                <li id="req-lower">One lowercase letter</li>
+                <li id="req-digit">One number</li>
+                <li id="req-special">One special character</li>
+              </ul>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="register-confirmPassword">Confirm Password</label>
+            <input id="register-confirmPassword" type="password" placeholder="Confirm your password" required autocomplete="new-password">
+          </div>
+          <button type="submit" class="submit-button">Create Account</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Tab switching
+    document.querySelectorAll('.tab-button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab + '-form').classList.add('active');
+      });
+    });
+
+    // Password validation
+    const passwordInput = document.getElementById('register-password');
+    passwordInput.addEventListener('input', () => {
+      const password = passwordInput.value;
+      document.getElementById('req-length').classList.toggle('met', password.length >= 8);
+      document.getElementById('req-upper').classList.toggle('met', /[A-Z]/.test(password));
+      document.getElementById('req-lower').classList.toggle('met', /[a-z]/.test(password));
+      document.getElementById('req-digit').classList.toggle('met', /\d/.test(password));
+      document.getElementById('req-special').classList.toggle('met', /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]/.test(password));
+    });
+
+    // Login form
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const errorDiv = document.getElementById('login-error');
+      errorDiv.style.display = 'none';
+      
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      
+      try {
+        const response = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await response.json();
+        
+        if (!response.ok) {
+          errorDiv.textContent = data.error?.message || 'Login failed';
+          errorDiv.style.display = 'block';
+        } else {
+          localStorage.setItem('accessToken', data.accessToken);
+          localStorage.setItem('refreshToken', data.refreshToken);
+          localStorage.setItem('user', JSON.stringify(data.user));
+          alert('Login successful! Welcome ' + data.user.firstName);
+        }
+      } catch (err) {
+        errorDiv.textContent = 'An error occurred';
+        errorDiv.style.display = 'block';
+      }
+    });
+
+    // Register form
+    document.getElementById('register-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const errorDiv = document.getElementById('register-error');
+      const successDiv = document.getElementById('register-success');
+      errorDiv.style.display = 'none';
+      successDiv.style.display = 'none';
+      
+      const formData = {
+        email: document.getElementById('register-email').value,
+        password: document.getElementById('register-password').value,
+        firstName: document.getElementById('register-firstName').value,
+        lastName: document.getElementById('register-lastName').value
+      };
+      
+      if (formData.password !== document.getElementById('register-confirmPassword').value) {
+        errorDiv.textContent = 'Passwords do not match';
+        errorDiv.style.display = 'block';
+        return;
+      }
+      
+      try {
+        const response = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+        const data = await response.json();
+        
+        if (!response.ok) {
+          errorDiv.textContent = data.error?.details?.errors?.join('. ') || data.error?.message || 'Registration failed';
+          errorDiv.style.display = 'block';
+        } else {
+          successDiv.textContent = data.message;
+          successDiv.style.display = 'block';
+          e.target.reset();
+        }
+      } catch (err) {
+        errorDiv.textContent = 'An error occurred';
+        errorDiv.style.display = 'block';
+      }
+    });
+
+    // Forgot password
+    document.getElementById('forgot-password-btn').addEventListener('click', async () => {
+      const email = prompt('Enter your email address:');
+      if (!email) return;
+      
+      try {
+        const response = await fetch('/api/auth/forgot-password', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const data = await response.json();
+        alert(data.message || 'Password reset email sent');
+      } catch (err) {
+        alert('An error occurred');
+      }
+    });
+  </script>
+</body>
+</html>
